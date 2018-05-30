@@ -1,5 +1,5 @@
 (ns huffman.priority-queue.binary.priority-queue
-  (:require [huffman.priority-queue.node-list :as nl])
+  (:require [huffman.priority-queue.binary.node-list :as nl])
   (:import (clojure.lang IPersistentStack ISeq)))
 
 (declare new-priority-queue seq-queue push-queue peek-priority? pop-priority?
