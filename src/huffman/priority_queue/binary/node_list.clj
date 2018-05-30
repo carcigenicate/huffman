@@ -1,4 +1,4 @@
-(ns huffman.priority-queue.split-interface-attempt.node-list)
+(ns huffman.priority-queue.binary.node-list)
 
 (defrecord Node [priority bucket child])
 
@@ -22,10 +22,17 @@
          :else (set-child-of-node cur-node (rec n-child))))
      root)))
 
-(defn remove-priority [root]
-  (if (= (count (:bucket root)) 1)
-    (:child root)
-    (update root :bucket subvec 1)))
+(defn- has-n-values? [node n]
+  (>= (count (:bucket node)) n))
 
-(defn peek-root [root]
-  (-> root :bucket (first)))
+(defn remove-priority [root]
+  (if (has-n-values? root 2)
+    (update root :bucket subvec 1)
+    (:child root)))
+
+(defn peek-root
+  "Returns a pair of [priority highest-priority-item], or nil if the node has no values."
+  [root]
+  (when (has-n-values? root 1)
+    (let [{:keys [bucket priority]} root]
+      [priority (first bucket)])))

@@ -1,5 +1,5 @@
-(ns huffman.priority-queue.return-priority-attempt.priority-queue
-  (:require [huffman.priority-queue.return-priority-attempt.node-list :as nl])
+(ns huffman.priority-queue.binary.priority-queue
+  (:require [huffman.priority-queue.node-list :as nl])
   (:import (clojure.lang IPersistentStack ISeq)))
 
 (declare new-priority-queue seq-queue push-queue peek-priority? pop-priority?
@@ -14,6 +14,7 @@
   (cons [q [p e :as priority-element-pair]] (push-queue q p e))
   (equiv [q1 q2] (equiv q1 q2))
 
+  (first [q] (peek-priority? q))
   (next [q] (second (pop-priority? q)))
   (more [q] (or (next q)
                 (empty q)))
@@ -72,9 +73,9 @@
 (defn seq-queue [^Priority-Queue queue]
   (when (and queue (not (queue-empty? queue)))
     (loop [rest-queue queue
-           acc []]
+           acc '()]
       (if-let [[popped remaining] (pop-priority? rest-queue)]
-        (recur remaining (conj acc popped))
+        (recur remaining (cons popped acc))
         acc))))
 
 (defn equiv [^Priority-Queue q1, ^Priority-Queue q2]
