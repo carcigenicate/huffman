@@ -1,7 +1,7 @@
 (ns huffman.priority-queue.singly-linked.priority-queue
   (:require [huffman.priority-queue.singly-linked.node-list :as nl]
             [criterium.core :as c])
-  (:import (clojure.lang IPersistentStack ISeq)))
+  (:import [clojure.lang IPersistentStack ISeq]))
 
 (declare new-priority-queue seq-queue push-queue peek-priority? pop-priority?
          equiv)
